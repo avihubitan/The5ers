@@ -1,0 +1,44 @@
+{
+  "name": "the5ers-stock-management",
+  "version": "1.0.0",
+  "description": "Stock Management Website - The5ers Home Assignment",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "nx run-many --target=serve --projects=frontend,backend --parallel",
+    "dev:frontend": "nx serve frontend",
+    "dev:backend": "nx serve backend",
+    "build": "nx run-many --target=build --projects=frontend,backend",
+    "build:frontend": "nx build frontend",
+    "build:backend": "nx build backend",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "nx": "nx"
+  },
+  "devDependencies": {
+    "@nx/workspace": "^17.2.8",
+    "@nx/plugin": "^17.2.8",
+    "@nx/jest": "^17.2.8",
+    "@nx/eslint-plugin": "^17.2.8",
+    "@nx/vite": "^17.2.8",
+    "@nx/react": "^17.2.8",
+    "@nx/node": "^17.2.8",
+    "@nx/nest": "^17.2.8",
+    "@nx/webpack": "^17.2.8",
+    "@nx/js": "^17.2.8",
+    "nx": "^17.2.8",
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "stock-management",
+    "react",
+    "nestjs",
+    "mongodb",
+    "mui",
+    "nx"
+  ],
+  "author": "The5ers Assignment",
+  "license": "MIT"
+}
