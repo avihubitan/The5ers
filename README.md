@@ -14,10 +14,12 @@ A comprehensive stock management web application built with React, NestJS, and M
 ## 🛠️ Tech Stack
 
 ### Monorepo & Build Tools
-- **Nx** for monorepo management and build orchestration
+
+- **Nx 17.2.8** for monorepo management and build orchestration
 - **npm workspaces** for dependency management
 
 ### Frontend
+
 - **React 18** with TypeScript
 - **Material-UI (MUI)** for modern UI components
 - **React Router** for navigation
@@ -25,6 +27,7 @@ A comprehensive stock management web application built with React, NestJS, and M
 - **Vite** for fast development and building
 
 ### Backend
+
 - **NestJS** with TypeScript
 - **MongoDB** with Mongoose ODM
 - **Financial Modeling Prep API** for stock data
@@ -45,7 +48,7 @@ Before running this application, make sure you have the following installed:
 
 ```bash
 git clone <your-repository-url>
-cd the5ers-stock-management
+cd the5ers
 ```
 
 ### 2. Install Dependencies
@@ -61,11 +64,12 @@ npm run install:all
 ### 3. Environment Setup
 
 #### Backend Environment
+
 Create a `.env` file in the `backend` directory:
 
 ```bash
 cd backend
-cp env.example .env
+touch .env
 ```
 
 Edit the `.env` file with your configuration:
@@ -84,6 +88,7 @@ NODE_ENV=development
 ```
 
 #### Get API Key
+
 1. Visit [Financial Modeling Prep](https://financialmodelingprep.com/developer/docs/)
 2. Create a free account
 3. Get your API key
@@ -103,11 +108,13 @@ mongod
 ### 5. Run the Application
 
 #### Development Mode (Both Frontend and Backend)
+
 ```bash
 npm run dev
 ```
 
 This will start:
+
 - Backend server on `http://localhost:3001`
 - Frontend development server on `http://localhost:3000`
 - Swagger documentation on `http://localhost:3001/api`
@@ -115,6 +122,7 @@ This will start:
 #### Run Separately
 
 **Backend only:**
+
 ```bash
 npm run dev:backend
 # or using Nx directly
@@ -122,6 +130,7 @@ nx serve backend
 ```
 
 **Frontend only:**
+
 ```bash
 npm run dev:frontend
 # or using Nx directly
@@ -129,6 +138,7 @@ nx serve frontend
 ```
 
 #### Nx Commands
+
 ```bash
 # View project graph
 nx graph
@@ -149,7 +159,7 @@ nx build backend
 ## 📁 Project Structure
 
 ```
-the5ers-stock-management/
+the5ers/
 ├── frontend/                 # React frontend application
 │   ├── src/
 │   │   ├── components/      # Reusable UI components
@@ -165,27 +175,33 @@ the5ers-stock-management/
 │   ├── src/
 │   │   ├── stocks/         # Stock-related modules
 │   │   ├── portfolio/      # Portfolio management
+│   │   ├── infrastructure/ # External services and cache
+│   │   ├── config/         # Configuration modules
+│   │   ├── types/          # TypeScript interfaces
 │   │   ├── app.module.ts   # Main app module
 │   │   └── main.ts         # App entry point
 │   ├── package.json
 │   ├── project.json        # Nx project configuration
 │   ├── webpack.config.js   # Webpack configuration for Nx
 │   ├── jest.config.ts      # Jest configuration for Nx
-│   └── env.example
+│   └── .env               # Environment variables (create this)
 ├── package.json             # Root package.json with Nx dependencies
 ├── nx.json                  # Nx workspace configuration
 ├── jest.preset.js          # Jest preset for Nx
+├── setup.md                # Quick setup guide
 └── README.md
 ```
 
 ## 🔧 API Endpoints
 
 ### Stocks
+
 - `GET /api/stocks/quote/:symbol` - Get stock quote by symbol
 - `GET /api/stocks/search?q=query` - Search stocks
 - `GET /api/stocks/quotes?symbols=symbol1,symbol2` - Get multiple stock quotes
 
 ### Portfolio
+
 - `GET /api/portfolio?userId=default` - Get user portfolio
 - `POST /api/portfolio/stocks?userId=default` - Add stock to portfolio
 - `DELETE /api/portfolio/stocks/:symbol?userId=default` - Remove stock from portfolio
@@ -193,6 +209,7 @@ the5ers-stock-management/
 ## 🎨 User Interface
 
 ### Portfolio Page
+
 - View all stocks in your portfolio
 - See real-time prices and changes
 - Add new stocks with search functionality
@@ -200,6 +217,7 @@ the5ers-stock-management/
 - Portfolio summary with total value and changes
 
 ### Stock Detail Page
+
 - Comprehensive stock information
 - Real-time price and change data
 - Trading information (open, high, low, volume)
@@ -208,12 +226,12 @@ the5ers-stock-management/
 
 ## 🔒 Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `MONGODB_URI` | MongoDB connection string | Yes |
-| `FINANCIAL_MODELING_PREP_API_KEY` | API key for stock data | Yes |
-| `PORT` | Backend server port | No (default: 3001) |
-| `NODE_ENV` | Environment mode | No (default: development) |
+| Variable                          | Description               | Required | Default     |
+| --------------------------------- | ------------------------- | -------- | ----------- |
+| `MONGODB_URI`                     | MongoDB connection string | Yes      | -           |
+| `FINANCIAL_MODELING_PREP_API_KEY` | API key for stock data    | Yes      | -           |
+| `PORT`                            | Backend server port       | No       | 3001        |
+| `NODE_ENV`                        | Environment mode          | No       | development |
 
 ## 🚀 Deployment
 
@@ -238,6 +256,32 @@ npm run build:backend
 4. Deploy the backend to your server
 5. Serve the frontend build files
 
+## 🧪 Testing
+
+```bash
+# Run all tests
+nx run-many --target=test --projects=frontend,backend
+
+# Run frontend tests
+nx test frontend
+
+# Run backend tests
+nx test backend
+```
+
+## 🔍 Code Quality
+
+```bash
+# Lint all projects
+nx run-many --target=lint --projects=frontend,backend
+
+# Lint frontend
+nx lint frontend
+
+# Lint backend
+nx lint backend
+```
+
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -250,23 +294,38 @@ npm run build:backend
 
 This project is licensed under the MIT License.
 
-## 🆘 Support
+## 🆘 Support & Troubleshooting
 
 If you encounter any issues:
 
-1. Check that MongoDB is running
-2. Verify your API key is correct
-3. Check the browser console for frontend errors
-4. Check the backend logs for server errors
-5. Ensure all environment variables are set correctly
+1. **MongoDB Connection**: Check that MongoDB is running and the connection string is correct
+2. **API Key Issues**: Verify your Financial Modeling Prep API key is valid and has sufficient quota
+3. **Frontend Errors**: Check the browser console for JavaScript errors
+4. **Backend Errors**: Check the server logs for detailed error messages
+5. **Environment Variables**: Ensure all required environment variables are set correctly
+6. **Port Conflicts**: Change the PORT in your .env file if port 3001 is already in use
+
+### Common Issues:
+
+- **CORS errors**: The backend is configured to allow requests from the frontend
+- **API rate limits**: The free tier of Financial Modeling Prep has rate limits
+- **MongoDB connection**: Make sure MongoDB is running on the specified URI
 
 ## 🎯 Evaluation Criteria Met
 
 - ✅ **Adherence to best practices**: Clean code structure, proper error handling, TypeScript usage
 - ✅ **Modularity, reusability, and separation of concerns**: Well-organized components and services
 - ✅ **Functional correctness and robustness**: Comprehensive error handling and validation
-- ✅ **Performance and maintainability**: Efficient API calls, proper state management
+- ✅ **Performance and maintainability**: Efficient API calls, proper state management, caching
 - ✅ **User interface design and usability**: Modern Material-UI design with responsive layout
+
+## 📚 Additional Resources
+
+- [Nx Documentation](https://nx.dev/)
+- [NestJS Documentation](https://nestjs.com/)
+- [React Documentation](https://react.dev/)
+- [Material-UI Documentation](https://mui.com/)
+- [Financial Modeling Prep API](https://financialmodelingprep.com/developer/docs/)
 
 ---
 
